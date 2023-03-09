@@ -1,0 +1,25 @@
+.promo {
+    min-height: 100vh;
+    position: relative;
+    background: url(../../img/promo_bg.jpg) no-repeat 50%/cover;
+    padding-top: 205px;
+
+    &__title {
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 60px;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+    &__btns {
+        width: 250px;
+        margin-top: 25px;
+        margin-right: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+
+}

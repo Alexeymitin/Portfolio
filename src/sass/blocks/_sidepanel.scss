@@ -1,0 +1,18 @@
+.sidepanel {
+    position: fixed;
+    top: 50%;
+    left: calc(-340px / 2) + 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 340px;
+    z-index: 3;
+    transform: rotate(-90deg) translateY(-50%);
+
+    &__divider {
+        height: 2px;
+        width: 70px;
+        background-color: black;
+    }
+
+}
