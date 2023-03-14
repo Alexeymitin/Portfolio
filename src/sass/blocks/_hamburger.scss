@@ -1,5 +1,5 @@
 .hamburger {
-	position: absolute;
+	position: fixed;
 	top: 20px;
 	right: 30px;
 	height: 21px;
@@ -7,6 +7,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: flex-end;
+	z-index: 999;
 	cursor: pointer;
 	span {
 		display: block;

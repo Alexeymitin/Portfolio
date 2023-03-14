@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    //hamburger
     const menu = document.querySelector(".menu"),
         hamburger = document.querySelector(".hamburger"),
         close = document.querySelectorAll("[data-close]");
@@ -12,4 +13,29 @@ document.addEventListener("DOMContentLoaded", () => {
             menu.classList.remove("active");
         });
     });
+
+    //skills complete
+
+    const percent = document.querySelectorAll('.about__complete_wrapper p'),
+          percentDisplay = document.querySelectorAll('.about__stats_background div');
+
+    percent.forEach((item, i) => {
+        percentDisplay[i].style.width = item.innerHTML;
+    })
+
+    //scrollUP
+    const scrollUp = document.querySelector(".pageup");
+
+    window.addEventListener("scroll", () => {
+        let scrollTop = window.scrollY;
+
+        if (scrollTop >= 1400) {
+            scrollUp.classList.add("active", "fadePageUP");
+        } else {
+            scrollUp.classList.remove("active", "fadePageUP");
+        }
+    });
+
+
+    
 });

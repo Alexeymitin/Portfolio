@@ -1,0 +1,114 @@
+.contacts {
+    padding-top: 120px;
+    padding-bottom: 90px;
+    &__wrapper {
+        display: grid;
+        grid-template-columns: minmax(200px, 400px) auto;
+        gap: 30px;
+        grid-auto-rows: auto;
+        justify-content: space-between;
+    }
+
+    &__photo {
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__content {
+        padding-top: 8px;
+    }
+
+    &__text {
+        margin-top: 20px;
+    }
+
+    &__social {
+        margin-top: 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    &__link {
+        margin-right: 25px;
+        width: 30px;
+        height: 30px;
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__form {
+        margin-top: 30px;
+        display: grid;
+        grid-template: 45px 190px 45px / repeat(2, auto);
+        justify-content: space-between;
+        grid-auto-rows: auto;
+        gap: 30px 25px;
+
+        label {
+            display: block;
+            position: absolute;
+            height: 18px;
+            padding: 0 8px;
+            background-color: #fff;
+            font-size: 12px;
+            top: -8px;
+            left: 12px;
+        }
+    }
+
+    &__input {
+        position: relative;
+
+        input {
+            width: 100%;
+            height: 100%;
+            padding: 0 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+    }
+
+    &__textarea {
+        position: relative;
+        grid-column: 1 / 3;
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            resize: none;
+            padding: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+    }
+
+    .button {
+        border: none;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 21px;
+		width: 219px;
+    }
+
+	&__policy {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 12px;
+		line-height: 14px;
+		input {
+			margin-right: 10px;
+		}
+		a {
+			color: blue;
+		}
+	}
+}

@@ -15,10 +15,10 @@
 
 
 
-
 .container {
     position: relative;
-    width: 1140px;
+    max-width: 1170px;
+    padding: 0 15px;
     margin: 0 auto;
 }
 
@@ -37,18 +37,10 @@
 @import 'blocks/menu';
 @import 'blocks/about';
 @import 'blocks/skills';
-
-// @media (max-width: 768px) {
-//     .container {
-//         max-width: 100%;
-//     }
-// }
+@import 'blocks/portfolio';
+@import 'blocks/contacts';
+@import 'blocks/pageup';
 
 
+@import 'blocks/media';
 
-// @media (max-width: 480px) {
-//     .container {
-//         width: 100%;
-//     }
-
-// }
