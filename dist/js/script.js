@@ -6,22 +6,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     hamburger.addEventListener("click", (e) => {
         menu.classList.add("active");
+        document.body.style.overflow = "hidden";
     });
 
     close.forEach((item) => {
         item.addEventListener("click", () => {
             menu.classList.remove("active");
+            document.body.style.overflow = "";
         });
     });
 
     //skills complete
 
-    const percent = document.querySelectorAll('.about__complete_wrapper p'),
-          percentDisplay = document.querySelectorAll('.about__stats_background div');
+    const percent = document.querySelectorAll(".about__complete_wrapper p"),
+        percentDisplay = document.querySelectorAll(
+            ".about__stats_background div"
+        );
 
     percent.forEach((item, i) => {
         percentDisplay[i].style.width = item.innerHTML;
-    })
+    });
 
     //scrollUP
     const scrollUp = document.querySelector(".pageup");
@@ -35,7 +39,14 @@ document.addEventListener("DOMContentLoaded", () => {
             scrollUp.classList.remove("active", "fadePageUP");
         }
     });
-
-
     
+
+    //Send form
+
+    // const form = document.querySelector('form');
+
+    // form.addEventListener('submit', (e) => {
+    //     e.preventDefault;
+
+    // })
 });

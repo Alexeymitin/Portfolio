@@ -279,3 +279,26 @@
     }
 }
 
+
+@media (max-height: 450px) {
+    .menu {
+        &__block {
+            padding-top: 50px;
+            padding-left: 10px;
+            width: 60%;
+        }
+
+        &__link {
+            font-size: 18px;
+
+        }
+        &__close {
+            top: 10px;
+            right: 10px;
+        }
+        &__social {
+            bottom: 50px;
+        }
+    }
+}
+
