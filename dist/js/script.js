@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     form.addEventListener("submit", formSend);
 
-    // let error = formValidate(form);
+    let error = formValidate(form);
 
     function formSend(e) {
         e.preventDefault();
@@ -66,9 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
             req.open("POST", "sendmail.php", true);
             req.onload = function () {
                 if (req.status >= 200 && req.status < 400) {
-                    // let json = JSON.parse(this.response); // Ебанный internet explorer 11
-                    // console.log(json);
-
                     // ЗДЕСЬ УКАЗЫВАЕМ ДЕЙСТВИЯ В СЛУЧАЕ УСПЕХА ИЛИ НЕУДАЧИ
                     if (req.status === 200) {
                         // Если сообщение отправлено
@@ -94,72 +91,48 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    inputEmail.addEventListener("input", () => {
+    inputEmail.addEventListener("input", (e) => {
+        console.log(inputEmail.value.length);
+        inputEmail.value = inputEmail.value.substring(0, 50);
         if (emailTest(inputEmail)) {
             formAddError(inputEmail);
-            // error++;
         } else {
             formRemoveError(inputEmail);
         }
     });
 
-    inputName.addEventListener("input", () => {
-        if (nameTest(inputName)) {
-            let Selection = inputName.selectionStart - 1;
-            inputName.value = inputName.value.replace(/[^a-zA-Z]/g, "");
-            inputName.setSelectionRange(Selection, Selection);
-            formAddError(inputName);
-        }
+    inputName.addEventListener("input", onNameInput);
+    inputName.addEventListener("paste", (e) => {
+        onNameInput();
     });
 
-    // function formValidate(form) {
-    //     let error = 0;
+    function onNameInput(e) {
+        let input = e.target,
+            inputNameValue = getInputNameValue(input);
 
-    //     let formRequare = document.querySelectorAll(".req");
+        input.value = inputNameValue.substring(0, 50);
 
-    //     for (let i = 0; i < formRequare.length; i++) {
-    //         const input = formRequare[i];
-    //         formRemoveError(input);
-    //         formRemoveError(checkbox);
-
-    //         if (input.getAttribute("type") === "email") {
-    //             if (emailTest(input)) {
-    //                 formAddError(input);
-    //                 error++;
-    //             }
-    //         } else if (
-    //             input.getAttribute("type") === "checkbox" &&
-    //             input.checked === false
-    //         ) {
-    //             formAddError(checkbox);
-    //             error++;
-    //         } else {
-    //             if (input.value === "") {
-    //                 formAddError(input);
-    //                 error++;
-    //             }
-    //         }
-    //     }
-    //     return error;
-    // }
+        if (!inputNameValue) {
+            formAddError(inputName);
+            return (input.value = "");
+        } else {
+            formRemoveError(inputName);
+        }
+    }
 
     function formAddError(input) {
-        // input.parentElement.classList.add("error");
         input.classList.add("error");
     }
 
     function formRemoveError(input) {
-        // input.parentElement.classList.remove("error");
         input.classList.remove("error");
     }
 
     function emailTest(input) {
-        return !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(
-            input.value
-        );
+        return !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(input.value);
     }
 
-    function nameTest(input) {
-        return !/[a-zA-ZА-Яа-яЁё]/.test(input.value);
+    function getInputNameValue(input) {
+        return input.value.replace(/[^a-zA-ZА-Яа-яЁё ]/, "");
     }
 });

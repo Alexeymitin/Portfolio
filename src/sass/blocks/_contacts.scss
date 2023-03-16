@@ -94,7 +94,7 @@
             transition: all 0.5s ease;
 
             &.error {
-                border: 2px solid red;
+                background-color: rgba(224, 31, 25, 0.12);
                 &:focus {
                     box-shadow: 0 0 5px red;
                 }
@@ -225,3 +225,9 @@
     }
 
 }
+
+// .name_valid {
+//     color: black;
+//     visibility: hidden;
+//     margin-left: 10px;
+// }

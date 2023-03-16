@@ -31,7 +31,7 @@ try {
     // Настройки вашей почты
     $mail->Host       = 'smtp.yandex.ru'; // SMTP сервера вашей почты
     $mail->Username   = 'N1kakawka@yandex.ru'; // Логин на почте
-    $mail->Password   = 'bpdbnprvrrnbueul'; // Пароль на почте
+    $mail->Password   = ''; // Пароль на почте
     $mail->SMTPSecure = 'ssl';
     $mail->Port       = 465;
     $mail->setFrom('N1kakawka@yandex.ru'); // Адрес самой почты и имя отправителя
