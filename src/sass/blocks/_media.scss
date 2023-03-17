@@ -3,7 +3,8 @@
         display: none;
     }
 
-
+    
+    
 }
 
 @media (max-width: 1200px) {
@@ -27,6 +28,10 @@
         &__complete {
             grid-template: repeat(2, 1fr) / repeat(auto-fit, 300px);
         }
+    }
+
+    .checkbox_valid {
+        left: -15px;
     }
 
 }
@@ -192,7 +197,7 @@
         &__form {
             grid-template: 45px 45px 190px minmax(45px, auto) / 1fr;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
         }
 
         &__textarea {
@@ -201,7 +206,7 @@
         }
 
         &__policy {
-            width: 180px;
+            width: 300px;
             margin: 0 auto;
             line-height: 18px;
         }
@@ -230,6 +235,14 @@
     .divider {
         margin-top: 15px;
     }
+
+    .checkbox_valid {
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+    }
+
+
 
 
 }
@@ -276,6 +289,10 @@
             width: 70%;
         }
 
+    }
+
+    .modal__window {
+        width: 100%;
     }
 }
 

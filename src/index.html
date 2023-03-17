@@ -383,14 +383,15 @@
 
                     <form action="#" method="POST" class="contacts__form">
                         <div class="contacts__input">
-                            <input class="input req" name="name" id="name" type="text" placeholder="Иван">
-                            <label class="label" for="name">Ваше имя</label>
-                            <!-- <span id="name_valid">Только буквы</span> -->
+                            <input class="input" name="name" id="name" type="text" placeholder="Иван">
+                            <label class="label" for="name">Ваше имя*</label>
+                            <div class="name_valid valid">Поле может содержать только буквы</div>
                         </div>
                         <div class="contacts__input">
-                            <input class="input email req" name="email" id="email" type="email"
-                                placeholder="Email@email.com">
-                            <label class="label" for="email">Ваша почта</label>
+                            <input class="input" name="email" id="email" type="text"
+                                placeholder="Email@mail.com">
+                            <label class="label" for="email">Ваша почта*</label>
+                            <div class="email_valid valid">Адрес почты должен быть формата 'mail@mail.com'</div>
                         </div>
                         <div class="contacts__textarea">
                             <textarea name="text" id="text" maxlength="1000"></textarea>
@@ -400,17 +401,28 @@
                         <button class="button active">Отправить сообщение</button>
                         <div class="contacts__policy">
                             <label class="contacts__policy_label">
-                                <input class="agreement req" id="agreement" name="agreement" type="checkbox">
-                                Я согласен(а) с<a target="_blank" href="/policy.html">&nbsp;политикой
-                                    конфиденциальности</a>
+                                <input class="agreement" id="agreement" name="agreement" type="checkbox">
+                                <p>Я согласен(а) с<a target="_blank" href="/policy.html">&nbsp;политикой
+                                        конфиденциальности</a></p>
                                 <span></span>
                             </label>
+                            <div class="checkbox_valid valid">Вы должны согласиться с политикой конфидициальности</div>
                         </div>
+                        
                     </form>
                 </div>
             </div>
         </div>
     </section>
+
+    
+    <div class="modal__overlay">
+        <div class="modal__window">
+            Спасибо за ваше сообщение!<br>
+            Я отвечу вам в течение 24 часов.
+            <button class="button active button_modal">Закрыть</button>
+        </div>
+    </div>
 
     <a href="#promo" class="pageup">
         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-circle-up"

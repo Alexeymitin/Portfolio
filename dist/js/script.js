@@ -45,23 +45,37 @@ document.addEventListener("DOMContentLoaded", () => {
     //Send form
 
     const form = document.querySelector(".contacts__form"),
-        checkbox = document.querySelector(".contacts__policy_label span"),
+        checkbox = document.querySelector(".contacts__policy_label input"),
         inputName = document.querySelector("#name"),
-        inputEmail = document.querySelector("#email");
+        inputEmail = document.querySelector("#email"),
+        warningName = document.querySelector(".name_valid"),
+        warningEmail = document.querySelector(".email_valid"),
+        warningCheckbox = document.querySelector(".checkbox_valid"),
+        warning = document.querySelectorAll(".valid");
 
-    form.addEventListener("submit", formSend);
+    // let error = 0;
 
-    let error = formValidate(form);
+    let validitedEmail = false,
+        validitedName = false;
 
-    function formSend(e) {
+    form.addEventListener("submit", (e) => {
         e.preventDefault();
+        validatingEmail();
+        validatingName();
+        validatingCheckbox();
 
         let formData = new FormData(form);
 
-        if (error === 0) {
-            form.classList.add("sending");
+        if (
+            validitedEmail === true &&
+            validitedName === true &&
+            inputName.value !== "" &&
+            inputEmail.value !== "" &&
+            checkbox.checked === true
+        ) {
             console.log("Отправка запроса");
-            e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+            // e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+            warningCheckbox.classList.remove("visibly");
             let req = new XMLHttpRequest();
             req.open("POST", "sendmail.php", true);
             req.onload = function () {
@@ -69,17 +83,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     // ЗДЕСЬ УКАЗЫВАЕМ ДЕЙСТВИЯ В СЛУЧАЕ УСПЕХА ИЛИ НЕУДАЧИ
                     if (req.status === 200) {
                         // Если сообщение отправлено
-                        form.classList.remove("sending");
-                        console.log(req.response);
-                        alert("Сообщение отправлено" + req.status);
+
+                        form.reset();
+                        bindModal(".modal__overlay", ".button_modal");
                     } else {
                         // Если произошла ошибка
-                        form.classList.remove("sending");
-                        alert("Ошибка. Сообщение не отправлено");
+                        alert(
+                            "Ошибка. Сообщение не отправлено. Попробуйте позже" +
+                                req.status
+                        );
                     }
                     // Если не удалось связаться с php файлом
                 } else {
-                    alert("Ошибка сервера. Номер: " + req.status);
+                    bindModal(".modal__overlay", ".button_modal");
+                    alert(
+                        "Ошибка сервера. Номер: " +
+                            req.status +
+                            " Попробуйте позже или вышлите мне на почту n1kak@mail.ru код ошибки"
+                    );
                 }
             };
 
@@ -89,36 +110,67 @@ document.addEventListener("DOMContentLoaded", () => {
             };
             req.send(formData);
         }
+    });
+
+   
+
+    function validatingCheckbox() {
+        if (checkbox.checked === false) {
+            warningAdd(warningCheckbox);
+        } else {
+            warningRemove(warningCheckbox);
+        }
     }
 
-    inputEmail.addEventListener("input", (e) => {
-        console.log(inputEmail.value.length);
+    function validatingEmail() {
         inputEmail.value = inputEmail.value.substring(0, 50);
+
         if (emailTest(inputEmail)) {
             formAddError(inputEmail);
+            warningAdd(warningEmail);
+            validitedEmail = false;
+            // error++;
         } else {
             formRemoveError(inputEmail);
+            warningRemove(warningEmail);
+            validitedEmail = true;
+            // error = 0;
         }
-    });
+        return validitedEmail;
+    }
 
-    inputName.addEventListener("input", onNameInput);
-    inputName.addEventListener("paste", (e) => {
-        onNameInput();
-    });
+    function validatingName() {
+        let inputNameValue = getInputNameValue(inputName);
 
-    function onNameInput(e) {
-        let input = e.target,
-            inputNameValue = getInputNameValue(input);
-
-        input.value = inputNameValue.substring(0, 50);
+        inputName.value = inputNameValue.substring(0, 50);
 
         if (!inputNameValue) {
             formAddError(inputName);
-            return (input.value = "");
+            warningAdd(warningName);
+            validitedName = false;
+            // error++;
+            return (inputName.value = "");
         } else {
             formRemoveError(inputName);
+            warningRemove(warningName);
+            validitedName = true;
+            // error = 0;
         }
+        return validitedName;
     }
+
+    function warningAdd(warn) {
+        warn.classList.add("visibly")
+       }
+    
+       function warningRemove(warn) {
+        warn.classList.remove("visibly")
+       }
+    
+
+    inputEmail.addEventListener("input", validatingEmail);
+
+    inputName.addEventListener("input", validatingName);
 
     function formAddError(input) {
         input.classList.add("error");
@@ -134,5 +186,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function getInputNameValue(input) {
         return input.value.replace(/[^a-zA-ZА-Яа-яЁё ]/, "");
+    }
+
+    //modal-thanks
+
+    function bindModal(overlaySelector, closeSelector) {
+        const overlay = document.querySelector(overlaySelector),
+            buttonCloseModal = document.querySelector(closeSelector);
+
+        function openModal() {
+            overlay.classList.add("visibly");
+            document.body.style.overflow = "hidden";
+        }
+
+        openModal();
+
+        overlay.addEventListener("click", closeModal);
+
+        function closeModal(e) {
+            if (e.target == overlay || e.target == buttonCloseModal) {
+                overlay.classList.remove("visibly");
+                document.body.style.overflow = "";
+                overlay.removeEventListener("click", closeModal);
+            }
+        }
     }
 });
